@@ -18,9 +18,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    gap: 3rem;
     align-items: center;
-    gap: 2rem;
-    justify-content: center;
     line-height: 1.5;
     font-family: Arial, sans-serif;
 }
@@ -48,15 +47,21 @@ ul, ol {
     gap: 2rem;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+}
+
 .gameboard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 5px;
-    width: 300px;
-    height: 300px;
     background-color: var(--background-color);
-    border: 2px solid var(--primary-color);
+    min-height: 500px;
+    min-width: 500px;
 }
 .cell {
     display: flex;
@@ -66,4 +71,11 @@ ul, ol {
     border: 1px solid var(--primary-color);
     font-size: 2rem;
     cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
