@@ -18,7 +18,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
     align-items: center;
     line-height: 1.5;
     font-family: Arial, sans-serif;
@@ -72,8 +72,9 @@ main {
     grid-template-rows: repeat(3, 1fr);
     gap: 5px;
     background-color: var(--background-color);
-    min-height: 500px;
-    min-width: 500px;
+    min-height: 400px;
+    min-width: 400px;
+    border: 1px solid var(--primary-color);
 }
 .cell {
     display: flex;

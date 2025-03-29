@@ -75,7 +75,7 @@ const Game = (() => {
     gameOver = false;
     currentPlayerIndex = 0;
     Gameboard.reset();
-    document.querySelector(".start-message").textContent = ""; // Clear any message on restart
+    document.querySelector(".start-message").textContent = "";
   };
 
   const checkWin = (mark) => {
@@ -102,7 +102,7 @@ const Game = (() => {
     const [rowIndex, colIndex] = cellId.split("-").map(Number);
 
     const currentPlayer = players[currentPlayerIndex];
-    if (Gameboard.getGameboard()[rowIndex][colIndex] !== "") return; // Prevent overwriting a cell
+    if (Gameboard.getGameboard()[rowIndex][colIndex] !== "") return;
 
     Gameboard.updateCell(rowIndex, colIndex, currentPlayer.mark);
 
