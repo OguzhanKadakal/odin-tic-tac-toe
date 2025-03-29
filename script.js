@@ -53,13 +53,13 @@ const Game = (() => {
     const player2Name = document.querySelector("#player2").value.trim();
     const messageElement = document.querySelector(".start-message");
 
-    // Check if both player names are provided
+   
     if (!player1Name || !player2Name) {
       messageElement.textContent = "Both players must enter their names to start the game.";
       return;
     }
 
-    // Clear any previous message
+    
     messageElement.textContent = "";
 
     players = [
