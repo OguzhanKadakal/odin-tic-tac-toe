@@ -31,7 +31,9 @@ const Gameboard = (() => {
     }
   };
 
-  return { render, reset, updateCell };
+  const getGameboard = () => gameboard;
+
+  return { render, reset, updateCell, getGameboard };
 })();
 
 const createPlayer = (name, mark) => {
@@ -47,9 +49,22 @@ const Game = (() => {
   let gameOver;
 
   const start = () => {
+    const player1Name = document.querySelector("#player1").value.trim();
+    const player2Name = document.querySelector("#player2").value.trim();
+    const messageElement = document.querySelector(".start-message");
+
+    // Check if both player names are provided
+    if (!player1Name || !player2Name) {
+      messageElement.textContent = "Both players must enter their names to start the game.";
+      return;
+    }
+
+    // Clear any previous message
+    messageElement.textContent = "";
+
     players = [
-      createPlayer(document.querySelector("#player1").value, "X"),
-      createPlayer(document.querySelector("#player2").value, "O"),
+      createPlayer(player1Name, "X"),
+      createPlayer(player2Name, "O"),
     ];
     currentPlayerIndex = 0;
     gameOver = false;
@@ -60,18 +75,52 @@ const Game = (() => {
     gameOver = false;
     currentPlayerIndex = 0;
     Gameboard.reset();
+    document.querySelector(".start-message").textContent = ""; // Clear any message on restart
+  };
+
+  const checkWin = (mark) => {
+    const board = Gameboard.getGameboard();
+
+    for (let row of board) {
+      if (row.every((cell) => cell === mark)) return true;
+    }
+
+    for (let col = 0; col < board.length; col++) {
+      if (board.every((row) => row[col] === mark)) return true;
+    }
+
+    if (board.every((row, index) => row[index] === mark)) return true;
+    if (board.every((row, index) => row[board.length - 1 - index] === mark)) return true;
+
+    return false;
   };
 
   const handleCellClick = (event) => {
     if (gameOver) return;
 
-    const cellId = event.target.id; 
+    const cellId = event.target.id;
     const [rowIndex, colIndex] = cellId.split("-").map(Number);
 
     const currentPlayer = players[currentPlayerIndex];
+    if (Gameboard.getGameboard()[rowIndex][colIndex] !== "") return; // Prevent overwriting a cell
+
     Gameboard.updateCell(rowIndex, colIndex, currentPlayer.mark);
 
-    
+    if (checkWin(currentPlayer.mark)) {
+      gameOver = true;
+      document.querySelector(".start-message").textContent = `${currentPlayer.name} wins!`;
+      return;
+    }
+
+    const isDraw = Gameboard.getGameboard().every((row) =>
+      row.every((cell) => cell !== "")
+    );
+    if (isDraw) {
+      gameOver = true;
+      document.querySelector(".start-message").textContent = "It's a draw!";
+      return;
+    }
+
     currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
   };
 
@@ -87,7 +136,6 @@ const restartButton = document.querySelector(".restart-game-btn");
 restartButton.addEventListener("click", () => {
   Game.restart();
 });
-
 
 const gameboardElement = document.querySelector(".gameboard");
 gameboardElement.addEventListener("click", (event) => {

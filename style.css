@@ -1,9 +1,9 @@
 /* Reset CSS */
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #c184dd;
-    --background-color: #f5f5f5;
-    --text-color: #333;
+    --primary-color: #4a90e2;
+    --secondary-color: #ff6f61;
+    --background-color: #f9fafb;
+    --text-color: #1a1a1a;
 }
 * {
     margin: 0;
@@ -60,6 +60,7 @@ header {
 main {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 3rem;
 
@@ -89,4 +90,43 @@ main {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+}
+
+.message {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    padding: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.start-message {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    padding: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
